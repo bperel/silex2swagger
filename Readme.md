@@ -100,3 +100,5 @@ For a more complete example have a look at the included Symfony Console command.
 ### v2.0.0
 * Update dependencies for Silex 2
 
+### v2.0.1
+* Update dependencies for ddesrosiers/silex-annotation-provider to the official 2.0 version
