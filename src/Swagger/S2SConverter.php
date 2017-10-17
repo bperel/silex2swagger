@@ -161,11 +161,16 @@ class S2SConverter
             return $migrated;
         }
 
-        $this->applyClassAnnotation($context, [$request]);
-
         // merge in some defaults
         $swgAnnotations = array_merge(['parameters' => []], $swgAnnotations);
         $extras = array_merge(['requirements' => []], $extras);
+
+        if ($controller = $this->applyClassAnnotation($context, $request)) {
+            if ($controller instanceof S2S\Controller) {
+                // prepend controller level shared parameters
+                $swgAnnotations['parameters'] = array_merge($controller->parameters, $swgAnnotations['parameters']);
+            }
+        }
 
         // extract parameters from uri
         // ie /foo/{id} and try to find matching requirements
@@ -284,25 +289,23 @@ class S2SConverter
      *
      * @return SLX\Controller|null
      */
-    protected function applyClassAnnotation(Context $context, array $requests)
+    protected function applyClassAnnotation(Context $context, SLX\Request $request)
     {
         foreach ($this->classAnnotations as $classContext) {
             if ($classContext->class == $context->class) {
                 $classAnnotation = $this->classAnnotations->offsetGet($classContext);
                 // deal with prefix
-                foreach ($requests as $request) {
-                    $request->uri = $classAnnotation->prefix . '/' . $request->uri;
-                    // keep relative
-                    if ('/' == $request->uri[0]) {
-                        $request->uri = substr($request->uri, 1);
-                    }
+                $request->uri = $classAnnotation->prefix . '/' . $request->uri;
+                // keep relative
+                if ('/' == $request->uri[0]) {
+                    $request->uri = substr($request->uri, 1);
                 }
 
                 return $classAnnotation;
             }
         }
 
-        return;
+        return null;
     }
 
     /**

@@ -98,6 +98,35 @@ class Controller
     }
 
 ````
+## Setting up common parameters within a Controller
+If you have parameters required on all endpoints in a controller it is possible to 
+define those on controller level to avoid code duplication.
+
+In order to do this there is a custom ````Controller```` annotation class that allows nested swagger parameters.
+All parameters defined that way will be injected into all routes inside the controller class.
+
+````php
+<?php
+
+namespace mycode;
+
+use Radebatz\Silex2Swagger\Swagger\Annotations as S2S;
+use Swagger\Annotations as SWG;
+
+/**
+ * @S2S\Controller(
+ *   @SWG\Parameter(
+ *     name="x-api-version",
+ *     in="header",
+ *     required=true,
+ *     type="string"
+ *   )
+ * )
+ */
+class MyController {
+    ...
+}
+````
 
 ## Generating Swagger
 ### Using the CL
@@ -105,7 +134,7 @@ class Controller
 ./bin/silex2swagger silex2swagger:build --path=[src] --file=swagger.json
 ````
 
-### Using (simple) cCode
+### Using (simple) code
 ````php
 <?php
 

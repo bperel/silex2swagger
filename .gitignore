@@ -1,6 +1,7 @@
 /.idea
 /vendor
-/composer.lock
-/bin/swagger
-/bin/coveralls
-/bin/phpunit
+bin/swagger
+bin/coveralls
+bin/phpunit
+composer.lock
+swagger.json
