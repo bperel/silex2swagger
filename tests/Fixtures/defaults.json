@@ -26,6 +26,42 @@
                 }
             }
         },
+        "\/shared\/get": {
+            "get": {
+                "operationId": "testGetRequest",
+                "parameters": [
+                    {
+                        "parameter": "x-api-version",
+                        "name": "x-api-version",
+                        "in": "header",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "GET"
+                    }
+                }
+            },
+            "post": {
+                "operationId": "testPostRequest",
+                "parameters": [
+                    {
+                        "parameter": "x-api-version",
+                        "name": "x-api-version",
+                        "in": "header",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "POST"
+                    }
+                }
+            }
+        },
         "\/silex\/get": {
             "get": {
                 "operationId": "testGetRequest",
@@ -81,6 +117,14 @@
                     "type": "string"
                 }
             }
+        }
+    },
+    "parameters": {
+        "x-api-version": {
+            "name": "x-api-version",
+            "in": "header",
+            "required": true,
+            "type": "string"
         }
     },
     "responses": {
