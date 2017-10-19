@@ -24,4 +24,28 @@ class Controller extends SLX\Controller
 
     /** @var \Swagger\Annotations\Parameter[] */
     public $parameters = [];
+
+    /** @var \Swagger\Annotations\Response[] */
+    public $responses = [];
+
+    /**
+     * Controller constructor.
+     *
+     * @param array $values
+     */
+    public function __construct(array $values = [])
+    {
+        foreach ($values as $propertyName => $value) {
+            if ('value' == $propertyName) {
+                foreach ((array)$values['value'] as $value) {
+                    $classPath = explode("\\", get_class($value));
+                    $propertyName = lcfirst(array_pop($classPath)).'s';
+                    $this->{$propertyName}[] = $value;
+                }
+            } else {
+                $this->{$propertyName} = $value;
+            }
+        }
+    }
+
 }

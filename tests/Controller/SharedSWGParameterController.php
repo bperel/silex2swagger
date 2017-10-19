@@ -13,6 +13,10 @@ use Swagger\Annotations as SWG;
  *     in="header",
  *     required=true,
  *     type="string"
+ *   ),
+ *   @SWG\Response(
+ *     response=401,
+ *     description="not authorized"
  *   )
  * )
  */

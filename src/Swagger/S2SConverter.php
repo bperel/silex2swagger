@@ -197,7 +197,7 @@ class S2SConverter
         if ($extras['schemes']) {
             $swgAnnotations['schemes'] = $extras['schemes'];
         }
-//        var_dump($request);
+
         if ($request instanceof S2S\Request) {
             $keys = array_keys(SWG\Operation::$_types);
             foreach ($request->swaggerProperties as $sp) {
@@ -265,6 +265,11 @@ class S2SConverter
                 } else {
                     $swgOperation->$key = $value;
                 }
+            }
+
+            if ($controller && ($controller instanceof S2S\Controller)) {
+                // append controller level shared responses
+                $swgOperation->responses = array_merge($swgOperation->responses, $controller->responses);
             }
 
             if (!$swgOperation->responses && $this->options['autoResponse']) {

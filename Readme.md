@@ -98,11 +98,11 @@ class Controller
     }
 
 ````
-## Setting up common parameters within a Controller
+## Setting up common parameters/responses within a Controller
 If you have parameters required on all endpoints in a controller it is possible to 
 define those on controller level to avoid code duplication.
 
-In order to do this there is a custom ````Controller```` annotation class that allows nested swagger parameters.
+In order to do this there is a **custom** ````Controller```` annotation class that allows nested swagger parameters.
 All parameters defined that way will be injected into all routes inside the controller class.
 
 ````php
@@ -120,6 +120,10 @@ use Swagger\Annotations as SWG;
  *     in="header",
  *     required=true,
  *     type="string"
+ *   ),
+ *   @SWG\Response(
+ *     response=401,
+ *     description="not authorized"
  *   )
  * )
  */
