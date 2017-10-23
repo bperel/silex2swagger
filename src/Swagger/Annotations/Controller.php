@@ -37,9 +37,11 @@ class Controller extends SLX\Controller
     {
         foreach ($values as $propertyName => $value) {
             if ('value' == $propertyName) {
-                foreach ((array)$values['value'] as $value) {
+                // might be array or single value...
+                $values = is_array($value) ? $value : [$value];
+                foreach ($values as $value) {
                     $classPath = explode("\\", get_class($value));
-                    $propertyName = lcfirst(array_pop($classPath)).'s';
+                    $propertyName = lcfirst(array_pop($classPath)) . 's';
                     $this->{$propertyName}[] = $value;
                 }
             } else {

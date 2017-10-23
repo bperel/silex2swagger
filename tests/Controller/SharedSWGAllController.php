@@ -7,16 +7,20 @@ use Radebatz\Silex2Swagger\Swagger\Annotations as S2S;
 use Swagger\Annotations as SWG;
 
 /**
- * @S2S\Controller(prefix="/shared",
+ * @S2S\Controller(prefix="/shared_all",
  *   @SWG\Parameter(
  *     name="x-api-version",
  *     in="header",
  *     required=true,
  *     type="string"
+ *   ),
+ *   @SWG\Response(
+ *     response=401,
+ *     description="not authorized"
  *   )
  * )
  */
-class SharedSWGParameterController
+class SharedSWGAllController
 {
     /**
      * @SLX\Route(

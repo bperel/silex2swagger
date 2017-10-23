@@ -26,7 +26,7 @@
                 }
             }
         },
-        "\/shared\/get": {
+        "\/shared_all\/get": {
             "get": {
                 "operationId": "testGetRequest",
                 "parameters": [
@@ -64,6 +64,40 @@
                     },
                     "401": {
                         "description": "not authorized"
+                    }
+                }
+            }
+        },
+        "\/shared\/get": {
+            "get": {
+                "operationId": "testGetRequest",
+                "parameters": [
+                    {
+                        "name": "x-api-version",
+                        "in": "header",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "GET"
+                    }
+                }
+            },
+            "post": {
+                "operationId": "testPostRequest",
+                "parameters": [
+                    {
+                        "name": "x-api-version",
+                        "in": "header",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "POST"
                     }
                 }
             }

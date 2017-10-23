@@ -28,10 +28,10 @@
                 }
             }
         },
-        "\/shared\/get": {
+        "\/shared_all\/get": {
             "get": {
-                "summary": "GET:\/shared\/get",
-                "description": "GET:\/shared\/get",
+                "summary": "GET:\/shared_all\/get",
+                "description": "GET:\/shared_all\/get",
                 "operationId": "testGetRequest",
                 "parameters": [
                     {
@@ -52,8 +52,8 @@
                 }
             },
             "post": {
-                "summary": "POST:\/shared\/get",
-                "description": "POST:\/shared\/get",
+                "summary": "POST:\/shared_all\/get",
+                "description": "POST:\/shared_all\/get",
                 "operationId": "testPostRequest",
                 "parameters": [
                     {
@@ -70,6 +70,44 @@
                     },
                     "401": {
                         "description": "not authorized"
+                    }
+                }
+            }
+        },
+        "\/shared\/get": {
+            "get": {
+                "summary": "GET:\/shared\/get",
+                "description": "GET:\/shared\/get",
+                "operationId": "testGetRequest",
+                "parameters": [
+                    {
+                        "name": "x-api-version",
+                        "in": "header",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "GET"
+                    }
+                }
+            },
+            "post": {
+                "summary": "POST:\/shared\/get",
+                "description": "POST:\/shared\/get",
+                "operationId": "testPostRequest",
+                "parameters": [
+                    {
+                        "name": "x-api-version",
+                        "in": "header",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "POST"
                     }
                 }
             }
