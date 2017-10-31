@@ -268,11 +268,15 @@ class S2SConverter
             }
 
             if ($controller && ($controller instanceof S2S\Controller)) {
+                $swgOperation->responses = $swgOperation->responses ?: [];
+
                 // append controller level shared responses
                 $swgOperation->responses = array_merge($swgOperation->responses, $controller->responses);
             }
 
             if (!$swgOperation->responses && $this->options['autoResponse']) {
+                $swgOperation->responses = $swgOperation->responses ?: [];
+
                 // add default response to make swagger happier :/
                 $swgOperation->responses = [new Response([
                     'response' => 'default',
