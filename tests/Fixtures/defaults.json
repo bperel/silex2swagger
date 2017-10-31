@@ -59,9 +59,6 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "POST"
-                    },
                     "401": {
                         "description": "not authorized"
                     }

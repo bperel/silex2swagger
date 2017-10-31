@@ -35,8 +35,7 @@ class SharedSWGAllController
 
     /**
      * @SLX\Route(
-     *   @SLX\Request(method="POST", uri="get"),
-     *   @SWG\Response(response=200, description="POST")
+     *   @SLX\Request(method="POST", uri="get")
      * )
      */
     public function testPostRequest()
