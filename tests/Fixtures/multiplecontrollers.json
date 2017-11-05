@@ -12,17 +12,6 @@
         "application\/json"
     ],
     "paths": {
-        "\/silex2\/get": {
-            "get": {
-                "operationId": "testGetRequestSilex2",
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "GET"
-                    }
-                }
-            }
-        },
         "\/request\/get": {
             "get": {
                 "operationId": "testCustomRequest",
@@ -75,6 +64,17 @@
             "get": {
                 "operationId": "bound",
                 "parameters": []
+            }
+        },
+        "\/silex2\/get": {
+            "get": {
+                "operationId": "testGetRequestSilex2",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "GET"
+                    }
+                }
             }
         }
     },
