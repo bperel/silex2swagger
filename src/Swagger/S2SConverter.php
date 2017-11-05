@@ -287,7 +287,7 @@ class S2SConverter
     protected function applyClassAnnotation(Context $context, array $requests)
     {
         foreach ($this->classAnnotations as $classContext) {
-            if ($classContext->class == $context->class) {
+            if ($classContext->fullyQualifiedName($classContext->class) === $context->fullyQualifiedName($context->class)) {
                 $classAnnotation = $this->classAnnotations->offsetGet($classContext);
                 // deal with prefix
                 foreach ($requests as $request) {
