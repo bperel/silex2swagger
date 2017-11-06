@@ -161,11 +161,16 @@ class S2SConverter
             return $migrated;
         }
 
-        $this->applyClassAnnotation($context, [$request]);
-
         // merge in some defaults
         $swgAnnotations = array_merge(['parameters' => []], $swgAnnotations);
         $extras = array_merge(['requirements' => []], $extras);
+
+        if ($controller = $this->applyClassAnnotation($context, $request)) {
+            if ($controller instanceof S2S\Controller) {
+                // prepend controller level shared parameters
+                $swgAnnotations['parameters'] = array_merge($controller->parameters, $swgAnnotations['parameters']);
+            }
+        }
 
         // extract parameters from uri
         // ie /foo/{id} and try to find matching requirements
@@ -192,7 +197,7 @@ class S2SConverter
         if ($extras['schemes']) {
             $swgAnnotations['schemes'] = $extras['schemes'];
         }
-//        var_dump($request);
+
         if ($request instanceof S2S\Request) {
             $keys = array_keys(SWG\Operation::$_types);
             foreach ($request->swaggerProperties as $sp) {
@@ -262,7 +267,16 @@ class S2SConverter
                 }
             }
 
+            if ($controller && ($controller instanceof S2S\Controller)) {
+                $swgOperation->responses = $swgOperation->responses ?: [];
+
+                // append controller level shared responses
+                $swgOperation->responses = array_merge($swgOperation->responses, $controller->responses);
+            }
+
             if (!$swgOperation->responses && $this->options['autoResponse']) {
+                $swgOperation->responses = $swgOperation->responses ?: [];
+
                 // add default response to make swagger happier :/
                 $swgOperation->responses = [new Response([
                     'response' => 'default',
@@ -284,25 +298,23 @@ class S2SConverter
      *
      * @return SLX\Controller|null
      */
-    protected function applyClassAnnotation(Context $context, array $requests)
+    protected function applyClassAnnotation(Context $context, SLX\Request $request)
     {
         foreach ($this->classAnnotations as $classContext) {
             if ($classContext->fullyQualifiedName($classContext->class) === $context->fullyQualifiedName($context->class)) {
                 $classAnnotation = $this->classAnnotations->offsetGet($classContext);
                 // deal with prefix
-                foreach ($requests as $request) {
-                    $request->uri = $classAnnotation->prefix . '/' . $request->uri;
-                    // keep relative
-                    if ('/' == $request->uri[0]) {
-                        $request->uri = substr($request->uri, 1);
-                    }
+                $request->uri = $classAnnotation->prefix . '/' . $request->uri;
+                // keep relative
+                if ('/' == $request->uri[0]) {
+                    $request->uri = substr($request->uri, 1);
                 }
 
                 return $classAnnotation;
             }
         }
 
-        return;
+        return null;
     }
 
     /**

@@ -43,19 +43,19 @@ class CommandTest extends \PHPUnit_Framework_TestCase
         return [
             'empty' => [
                 [],
-                file_get_contents(__DIR__ . '/Fixtures/empty.json'),
+                __DIR__ . '/Fixtures/empty.json',
             ],
             'defaults' => [
                 ['--path' => __DIR__ . '/Controller'],
-                file_get_contents(__DIR__ . '/Fixtures/defaults.json'),
+                __DIR__ . '/Fixtures/defaults.json',
             ],
             'multiplecontrollers' => [
-                ['--path' => __DIR__],
-                file_get_contents(__DIR__ . '/Fixtures/multiplecontrollers.json'),
+                ['--path' => __DIR__. '/Controller2'],
+                __DIR__ . '/Fixtures/multiplecontrollers.json',
             ],
             'auto' => [
                 ['--path' => __DIR__ . '/Controller', '--auto-response' => true, '--auto-description' => true, '--auto-summary' => true],
-                file_get_contents(__DIR__ . '/Fixtures/auto.json'),
+                __DIR__ . '/Fixtures/auto.json',
             ],
         ];
     }
@@ -66,6 +66,7 @@ class CommandTest extends \PHPUnit_Framework_TestCase
     public function testFixtures($args, $expected)
     {
         $swagger = $this->runCommand($args);
-        $this->assertEquals($expected, $swagger);
+
+        $this->assertEquals(file_get_contents($expected), $swagger);
     }
 }

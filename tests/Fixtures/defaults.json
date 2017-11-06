@@ -26,6 +26,79 @@
                 }
             }
         },
+        "\/shared_all\/get": {
+            "get": {
+                "operationId": "testGetRequest",
+                "parameters": [
+                    {
+                        "parameter": "x-api-version",
+                        "name": "x-api-version",
+                        "in": "header",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "GET"
+                    },
+                    "401": {
+                        "description": "not authorized"
+                    }
+                }
+            },
+            "post": {
+                "operationId": "testPostRequest",
+                "parameters": [
+                    {
+                        "parameter": "x-api-version",
+                        "name": "x-api-version",
+                        "in": "header",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "not authorized"
+                    }
+                }
+            }
+        },
+        "\/shared\/get": {
+            "get": {
+                "operationId": "testGetRequest",
+                "parameters": [
+                    {
+                        "name": "x-api-version",
+                        "in": "header",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "GET"
+                    }
+                }
+            },
+            "post": {
+                "operationId": "testPostRequest",
+                "parameters": [
+                    {
+                        "name": "x-api-version",
+                        "in": "header",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "POST"
+                    }
+                }
+            }
+        },
         "\/silex\/get": {
             "get": {
                 "operationId": "testGetRequest",
@@ -83,9 +156,20 @@
             }
         }
     },
+    "parameters": {
+        "x-api-version": {
+            "name": "x-api-version",
+            "in": "header",
+            "required": true,
+            "type": "string"
+        }
+    },
     "responses": {
         "200": {
             "description": "GET"
+        },
+        "401": {
+            "description": "not authorized"
         }
     }
 }
