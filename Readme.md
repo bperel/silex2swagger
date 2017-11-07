@@ -200,4 +200,5 @@ For a more complete example have a look at the included Symfony Console command.
 * Bump PHP requirements to PHP 5.6
 
 ### v3.0.1
+* Fix bug where controller classes need to be compared using FQCN
 * Allow to share parameters and responses within a controller [#9]
